@@ -1,0 +1,49 @@
+.meteo {
+  max-width: 250px;
+  margin: 1rem auto;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 3px;
+  text-align: left;
+  &-thermometer {
+    height: 5px;
+    background-color: rgba(0,0,0,.1);
+    margin-top: 1rem;
+
+    &-inside {
+      height: 100%;
+      animation: thermometer 1s;
+    }
+  }
+  &-container {
+    display: flex;
+  }
+
+  &-infos {
+    width: 100%;
+  }
+
+  &-temperature {
+    text-align: right;
+    margin: 0;
+    font-size: 2.5em;
+  }
+
+  &-city {
+    margin: 0;
+    font-size: 1.5em;
+  }
+
+  &-code {
+    margin: 0;
+    opacity: .25;
+  }
+
+}
+
+@keyframes thermometer {
+  from {
+    width: 0;
+  }
+}
