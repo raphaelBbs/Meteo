@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import './style.scss';
 import axios from 'axios';
 
-const EXTERNALAPI = 'https://api.openweathermap.org/data/2.5/weather?';
-const APIKEY = '1ff381cee72c6b871b498a4469e57813';
+
 
 const WidgetMeteo = ({ city, code }) => {
   const [temperature, setTemperature] = useState(5);
-  const url = `${EXTERNALAPI}q=${city},fr&units=metric&appid=${APIKEY}`;
+  const { REACT_APP_API_URL, REACT_APP_API_TOKEN } = process.env;
+  let baseUrl = REACT_APP_API_URL;
 
+  let url = `${baseUrl}q=${city}&units=metric&appid=${REACT_APP_API_TOKEN}`;
+  console.log(url)
   useEffect(() => {
     axios({
       url,
@@ -76,7 +78,7 @@ const WidgetMeteo = ({ city, code }) => {
 
 WidgetMeteo.propTypes = {
   city: PropTypes.string.isRequired,
-  code: PropTypes.number.isRequired,
+  code: PropTypes.string.isRequired,
 };
 
 export default WidgetMeteo;
