@@ -3,7 +3,24 @@ import PropTypes from 'prop-types';
 import './style.scss';
 const WidgetMeteo = ({ city, code }) => {
   const temperature = Math.random() * 60 - 20;
-  const percent = 50;
+  const getTemperaturePercentage = (temperature) => {
+    let limitedTemperature = temperature;
+    const min = -20;
+    const max = 50;
+    // Ici je borne à -20 au minimum
+    limitedTemperature = Math.max(min, temperature);
+    // Ici je borne à +50 au maximum
+    limitedTemperature = Math.min(max, temperature);
+    // Je peux faire un produit en croix pour déterminer
+    // le pourcentage
+    limitedTemperature = limitedTemperature - min;
+    const result = limitedTemperature * 100 / (max - min);
+    // Je feux trouver une valeur en % pour la temperature
+    // que j'ai reçue.
+    console.log(limitedTemperature);
+    console.log(result);
+    return result;
+  };
   return (
     <article className="meteo">
       <div className="meteo-container">
@@ -19,7 +36,7 @@ const WidgetMeteo = ({ city, code }) => {
         <div
           className="meteo-thermometer-inside"
           style={{
-            width: `${percent}%`,
+            width: `${getTemperaturePercentage(temperature)}%`,
           }}
         />
       </div>
