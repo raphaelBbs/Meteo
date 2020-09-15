@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import './style.scss';
 const WidgetMeteo = ({ city, code }) => {
   const temperature = Math.random() * 60 - 20;
+  const getTemperatureHue = (percent) => {
+    let min = 0;
+    let max = 230;
+    // produit en croix / attention au 'max -', sans ça on aurait bleu = chaud et rouge = froid 
+    return max - (percent * (max - min) / 100);
+  };
   const getTemperaturePercentage = (temperature) => {
     let limitedTemperature = temperature;
     const min = -20;
@@ -21,6 +27,9 @@ const WidgetMeteo = ({ city, code }) => {
     console.log(result);
     return result;
   };
+  const percent = getTemperaturePercentage(temperature);
+  const hue = getTemperaturePercentage(percent);
+
   return (
     <article className="meteo">
       <div className="meteo-container">
@@ -36,7 +45,8 @@ const WidgetMeteo = ({ city, code }) => {
         <div
           className="meteo-thermometer-inside"
           style={{
-            width: `${getTemperaturePercentage(temperature)}%`,
+            width: `${percent}%`,
+            backgroundColor: `hsl(${hue}, 90%, 40%)`
           }}
         />
       </div>
