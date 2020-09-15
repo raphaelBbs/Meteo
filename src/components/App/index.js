@@ -5,10 +5,10 @@ import WidgetMeteo from '../MeteoWidget';
 function App() {
   return (
     <div className="App">
-      <WidgetMeteo city="Angers" code={49} />
-      <WidgetMeteo city="Paris" code={75} />
-      <WidgetMeteo city="Nimes" code={30} />
-      <WidgetMeteo city="Kleinfrankenheim" code={67} />
+      <WidgetMeteo city="Angers" code={49000} />
+      <WidgetMeteo city="Paris" code={75000} />
+      <WidgetMeteo city="Nimes" code={30000} />
+      <WidgetMeteo city="Kleinfrankenheim" code={67000} />
     </div>
   );
 }

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
+import axios from 'axios';
+
+const EXTERNALAPI = 'https://api.openweathermap.org/data/2.5/weather?';
+const APIKEY = '1ff381cee72c6b871b498a4469e57813';
+
 const WidgetMeteo = ({ city, code }) => {
-  const temperature = Math.random() * 60 - 20;
+  const [temperature, setTemperature] = useState(5);
+  const url = `${EXTERNALAPI}q=${city},fr&units=metric&appid=${APIKEY}`;
+
+  useEffect(() => {
+    axios({
+      url,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setTemperature(res.data.main.temp);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }, [url]);
+
   const getTemperatureHue = (percent) => {
     let min = 0;
     let max = 230;
@@ -28,7 +48,7 @@ const WidgetMeteo = ({ city, code }) => {
     return result;
   };
   const percent = getTemperaturePercentage(temperature);
-  const hue = getTemperaturePercentage(percent);
+  const hue = getTemperatureHue(percent);
 
   return (
     <article className="meteo">
